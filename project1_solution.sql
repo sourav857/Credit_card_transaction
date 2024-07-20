@@ -110,19 +110,7 @@ where datepart(weekday,transaction_date) in (1,7)
 group by city
 order by ratio desc;
 
---9- which city took least number of days to reach its
---500th transaction after the first transaction in that city;
-;
-with cte as (
-select *
-,row_number() over(partition by city order by transaction_date,transaction_id) as rn
-from credit_card_transcations)
-select top 1 city,datediff(day,min(transaction_date),max(transaction_date)) as datediff1
-from cte
-where rn=1 or rn=500
-group by city
-having count(1)=2
-order by datediff1 
+
 
 
 
