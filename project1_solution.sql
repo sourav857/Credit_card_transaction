@@ -1,5 +1,21 @@
 select * from credit_card_transcations
 
+The project is divided into several modules:
+
+--City Spend Analysis: Identified the top 5 cities with the highest total spending and their percentage contribution to overall spending.
+--Card Type Spend Analysis: Determined the month with the highest spending for each card type.
+--Cumulative Spend Tracking: Tracked transactions reaching a cumulative spend of 1,000,000 for each card type.
+--Gold Card Spending: Analyzed which city had the lowest percentage of spending for Gold cards.
+--Expense Type Analysis: Reviewed the distinct expense types and calculated the percentage contribution of female spending for each type.
+--Month-over-Month Growth: Found the card and expense type combination with the highest growth in January 2014.
+--Weekend Spending Ratio: Identified the city with the highest spending-to-transaction ratio during weekends.
+--Transaction Speed: Calculated the number of days it took for each city to reach its 500th transaction after the first transaction."**
+
+
+
+
+  
+
 --1-write a query to print top 5 cities with highest spends 
 --and their percentage contribution of total credit card spends 
 ;
@@ -35,6 +51,8 @@ select * from (select *, rank() over(partition by card_type order by total_spend
 from cte where total_spend >= 1000000) a where rn=1
 
 --4- write a query to find city which had lowest percentage spend for gold card type
+--"I found the city where Gold card spending was the lowest percentage of total spending. 
+--This involved calculating the spending ratio for Gold cards and selecting the city with the smallest ratio."
 with cte as (
 select top 1 city,card_type,sum(amount) as amount
 ,sum(case when card_type='Gold' then amount end) as gold_amount
